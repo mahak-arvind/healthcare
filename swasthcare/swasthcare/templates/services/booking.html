@@ -1,0 +1,87 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/booking.css' %}">
+
+<div class="booking-container">
+
+    <div class="booking-card">
+
+        <h2>Book {{test.name}}</h2>
+
+        <p class="price">Price: ₹{{test.price}}</p>
+        {% if error %}
+          <p style="color:red;">{{ error }}</p>
+        {% endif %}
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <div class="input-group">
+                <label>Name</label>
+                <input type="text" name="name" placeholder="Enter your name" required>
+            </div>
+
+            <div class="input-group">
+                <label>Phone</label>
+                <input type="text" name="phone" placeholder="Enter phone number" required>
+            </div>
+
+            <div class="input-group">
+                <label>Address</label>
+                <textarea name="address" placeholder="Enter your address"></textarea>
+            </div>
+
+            <div class="input-group">
+                <label> Select visiting Date</label>
+                <input type="date" name="visit_date" id="visit_date" required>
+            </div>
+
+
+
+            <div class="input-group">
+                <label>Select Visit Time</label>
+
+                <select name="visit_time">
+
+                    <option>8 AM - 10 AM</option>
+                    <option>10 AM - 12 PM</option>
+                    <option>12 PM - 2 PM</option>
+                    <option>2 PM - 4 PM</option>
+
+                </select>
+            </div>
+
+            <button class="book-btn" type="submit">
+                Confirm Booking
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script>
+
+let today = new Date()
+
+let tomorrow = new Date()
+tomorrow.setDate(today.getDate() + 1)
+
+let dayAfter = new Date()
+dayAfter.setDate(today.getDate() + 2)
+
+function formatDate(date){
+    let year = date.getFullYear()
+    let month = String(date.getMonth()+1).padStart(2,'0')
+    let day = String(date.getDate()).padStart(2,'0')
+    return `${year}-${month}-${day}`
+}
+
+let input = document.getElementById("visit_date")
+
+input.min = formatDate(tomorrow)
+input.max = formatDate(dayAfter)
+
+</script>

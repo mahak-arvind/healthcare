@@ -1,0 +1,36 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<div class="services-container">
+
+<h1 class="section-title">Popular Lab Tests</h1>
+
+<div class="services-grid">
+
+{% for test in tests %}
+
+<div class="service-card">
+
+<img src="{{ test.image.url }}" alt="{{ test.name }}" class="service-img">
+
+<h3>{{ test.name }}</h3>
+
+<p>{{ test.description }}</p>
+
+<div class="service-bottom">
+
+<span class="price">₹{{ test.price }}</span>
+
+<a href="/services/book/{{ test.id }}/">
+<button class="book-btn">Book Test</button>
+</a>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</div>

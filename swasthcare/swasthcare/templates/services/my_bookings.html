@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="mybooking-container">
+
+<h2 class="mybooking-title">My Test Bookings</h2>
+
+{% for booking in bookings %}
+
+<div class="mybooking-card">
+
+<div class="mybooking-left">
+
+<h3>{{ booking.test.name }}</h3>
+
+    <p><strong>Name:</strong> {{ booking.name }}</p>
+
+    <p><strong>Phone:</strong> {{ booking.phone }}</p>
+
+    <p><strong>Address:</strong> {{ booking.address }}</p>
+
+    <p><strong>Date:</strong> {{ booking.visit_date }}</p>
+
+    <p><strong>Time:</strong> {{ booking.visit_time }}</p>
+
+
+
+
+<p class="mybooking-status">Status : {{ booking.status }}</p>
+
+</div>
+
+<div class="collector-info">
+
+{% if booking.collector %}
+
+<img src="{{ booking.collector.photo.url }}">
+
+<p><b>{{ booking.collector.name }}</b></p>
+<p>{{ booking.collector.phone }}</p>
+<p>Sample Collector</p>
+
+{% else %}
+
+<p class="collector-pending">Collector will be assigned soon</p>
+
+{% endif %}
+
+</div>
+
+</div>
+
+{% endfor %}
+
+
+</div>
+
+{% endblock %}

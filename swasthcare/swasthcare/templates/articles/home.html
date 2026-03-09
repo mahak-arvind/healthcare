@@ -1,0 +1,111 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SwasthCare</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+
+
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+    <h2>SwasthCare</h2>
+
+    <div class="nav-links">
+        <a href="#">Home</a>
+        <a href="#">Fitness</a>
+        <a href="{% url 'my_bookings' %}">My Appointments</a>
+        <a href="{% url 'services' %}">Health Services</a>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+
+<section class="hero">
+
+    <h1>Your Smart Healthcare Companion</h1>
+
+    <p>Compare health services, find medicine delivery, and get AI health guidance.</p>
+
+</section>
+
+<!-- Articles Section -->
+
+<section class="articles">
+
+<h2>Fitness & Health Articles</h2>
+
+<div class="article-grid">
+
+{% for article in articles %}
+
+<div class="card">
+
+<img src="{{ article.image }}" alt="health image">
+
+<h3>{{ article.title }}</h3>
+
+<p>{{ article.description }}</p>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</section>
+
+<!-- AI Chat Button -->
+
+<div id="chatButton">💬 AI Health</div>
+
+<div id="chatBox">
+
+<div class="chat-header">
+AI Health Assistant
+<span onclick="closeChat()">✖</span>
+</div>
+
+<div id="chatMessages"></div>
+
+<div class="chat-input">
+<input type="text" id="userInput" placeholder="Ask about diet, fitness...">
+<button onclick="sendMessage()">Send</button>
+</div>
+
+</div>
+<script>
+
+document.addEventListener("DOMContentLoaded", function(){
+
+let chatButton = document.getElementById("chatButton");
+let chatBox = document.getElementById("chatBox");
+let chatMessages = document.getElementById("chatMessages");
+
+chatButton.onclick = function(){
+chatBox.style.display="block";
+}
+
+/* AUTO POPUP + WELCOME */
+
+setTimeout(function(){
+
+chatBox.style.display="block";
+
+chatMessages.innerHTML += "<p><b>AI:</b> 👋 Hi! I'm your AI Health Assistant. Ask me about diet, fitness or exercise.</p>";
+
+},3000);
+
+});
+
+function closeChat(){
+document.getElementById("chatBox").style.display="none";
+}
+
+</script>
+</body>
+</html>
